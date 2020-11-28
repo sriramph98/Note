@@ -9,12 +9,16 @@ import SwiftUI
 
 struct NoteRow: View {
     
-    var note: Note
+    var noteTitle: String = ""
+    var noteTimeStamp: String = ""
+    
     var body: some View {
         
         VStack(alignment: .leading){
-            Text(note.name)
-            Text(note.data)
+            Text(noteTitle)
+                .font(.headline)
+            Text(noteTimeStamp)
+                .font(.caption)
                 .foregroundColor(.gray)
         }
         
@@ -23,6 +27,6 @@ struct NoteRow: View {
 
 struct NoteRow_Previews: PreviewProvider {
     static var previews: some View {
-        NoteRow(note: noteData[0])
+        NoteRow(noteTitle: "Note", noteTimeStamp:"Today")
     }
 }

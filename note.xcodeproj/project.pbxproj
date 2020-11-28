@@ -54,7 +54,6 @@
 			isa = PBXGroup;
 			children = (
 				7B0EC42125710D6D00D23779 /* Note.swift */,
-				7B0EC41C25710D5700D23779 /* Data.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -63,9 +62,17 @@
 			isa = PBXGroup;
 			children = (
 				7B440E5A25726508000C0151 /* NoteData.xcdatamodeld */,
-				7B0EC43325710EAA00D23779 /* NoteData.json */,
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		7B4FC0FA257273340086AC16 /* delete */ = {
+			isa = PBXGroup;
+			children = (
+				7B0EC41C25710D5700D23779 /* Data.swift */,
+				7B0EC43325710EAA00D23779 /* NoteData.json */,
+			);
+			path = delete;
 			sourceTree = "<group>";
 		};
 		7BE7FF942570F3BA008EE268 = {
@@ -95,6 +102,7 @@
 				7B0EC41425710BC700D23779 /* NoteView.swift */,
 				7B862B992571DCD900216DFD /* NoteRow.swift */,
 				7B0EC43225710E8900D23779 /* Resources */,
+				7B4FC0FA257273340086AC16 /* delete */,
 				7BE7FFA62570F3BE008EE268 /* Assets.xcassets */,
 				7BE7FFAB2570F3BE008EE268 /* LaunchScreen.storyboard */,
 				7BE7FFAE2570F3BE008EE268 /* Info.plist */,

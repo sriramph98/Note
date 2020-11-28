@@ -10,27 +10,34 @@ import SwiftUI
 
 
 struct NoteView: View {
-    var note: Note
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: Note.getAllNotes()) var notes: FetchedResults<Note>
+    
+//    var note: Note
 
-    @State public var fullText: String = noteData[0].name
+    @State private var noteText:String  = "Edit"
+    
+    
+    
 @State var isShowingImagePicker = false
     
     @State var imageInContainer = UIImage()
+    let imageData = UIImage().pngData()
     
     
     var body: some View {
         Section {
             
             VStack{
-                ScrollView{
-                    TextEditor(text: $fullText)
+//                ScrollView{
+                    TextEditor(text: self.$noteText)
                         .padding()
-                }
+//                }
                 HStack{
                     Image(uiImage: imageInContainer)
                         .resizable()
                         .scaledToFit()
-          
+
                 }
       
                 HStack
@@ -63,9 +70,26 @@ struct NoteView: View {
     
             
         }
-        .navigationTitle(note.name)
-        .navigationBarItems(trailing:Label("Share", systemImage: "share").foregroundColor(.accentColor))
-
+        .navigationTitle(self.noteText)
+        .navigationBarItems(trailing:
+                                Button(action: {
+                                    let note = Note(context: self.managedObjectContext)
+                                    note.noteTitle = self.noteText
+                                    note.noteTimeStamp = Date()
+                                    note.image = self.imageData
+                                    
+                                    do {
+                                        try self.managedObjectContext.save()
+                                
+                                    }catch{
+                                        print(error)
+                                    }
+//                                    self.newNote = ""
+                                }) {
+                                    Image(systemName: "plus.circle.fill")
+                                        .foregroundColor(.green)
+                                }
+        )
     }
 
 }
@@ -116,9 +140,7 @@ extension View {
 
 struct NoteView_Previews: PreviewProvider {
     static var previews: some View {
-        Group{
-            NoteView(note: noteData[0])
-            
-        }
+            NoteView()
+        
     }
 }
