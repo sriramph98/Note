@@ -8,17 +8,49 @@
 import SwiftUI
 
 struct NoteList: View {
+    
     var body: some View {
-        NavigationView {
-            List(noteData) { note in
-                NavigationLink(destination: NoteView(note: note)) {
-                    NoteRow(note: note)
+        
+    
+            NavigationView {
+                List(noteData) { note in
+                    NavigationLink(destination: NoteView(note: note)) {
+                        NoteRow(note: note)
+                    }
                 }
-            }
-            .navigationBarTitle(Text("Notes"))
+                
+                .listStyle(InsetGroupedListStyle())
+                .navigationBarTitle(Text("Notes"))
+                .navigationBarItems(trailing:
+                                        Button(action: {
+                                           
+                                            print("Button performed")
+                                        },
+                                        label:{
+                                            Label("Compose", systemImage: "camera")
+                                                
+                                                
+                                            
+                                        }
+                                    
+                                        )
+                                        .labelStyle(TitleOnlyLabelStyle())
+
+
+                )
+                            }
         }
-    }
-}
+
+           
+        }
+   
+            
+            
+        
+        
+
+    
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {

@@ -11,7 +11,13 @@ struct NoteRow: View {
     
     var note: Note
     var body: some View {
-        Text(note.name)
+        
+        VStack(alignment: .leading){
+            Text(note.name)
+            Text(note.data)
+                .foregroundColor(.gray)
+        }
+        
     }
 }
 

@@ -11,6 +11,7 @@ import SwiftUI
 
 struct NoteView: View {
     var note: Note
+
     @State public var fullText: String = noteData[0].name
 @State var isShowingImagePicker = false
     
@@ -19,6 +20,7 @@ struct NoteView: View {
     
     var body: some View {
         Section {
+            
             VStack{
                 ScrollView{
                     TextEditor(text: $fullText)
@@ -51,17 +53,18 @@ struct NoteView: View {
                     Spacer()
                     Label("Delete", systemImage: "trash")
                 }
-                .foregroundColor(.black)
+                .foregroundColor(.accentColor)
                 .font(.system(size: 20))
                 .labelStyle(IconOnlyLabelStyle())
                 .padding()
 
-            }
+            }.onTapGesture {
+                self.hideKeyboard()}
     
             
         }
-   
-        .navigationBarTitle(Text(note.name), displayMode: .inline)
+        .navigationTitle(note.name)
+        .navigationBarItems(trailing:Label("Share", systemImage: "share").foregroundColor(.accentColor))
 
     }
 
@@ -103,6 +106,12 @@ struct ImagePickerView: UIViewControllerRepresentable {
     UIViewControllerRepresentableContext<ImagePickerView>) {
     }
     
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }
 
 struct NoteView_Previews: PreviewProvider {
