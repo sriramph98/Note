@@ -1,42 +1,51 @@
 //
-//  NoteDetail.swift
+//  NoteView.swift
 //  note
 //
-//  Created by Sriram P H on 27/11/20.
+//  Created by Sriram P H on 29/11/20.
 //
 
 import SwiftUI
-//import UIKit
-
 
 struct NoteView: View {
-    @Environment(\.managedObjectContext) var managedObjectContext
-    @FetchRequest(fetchRequest: Note.getAllNotes()) var notes: FetchedResults<Note>
-    
-//    var note: Note
 
-    @State private var noteText:String  = "Edit"
-    
-    
+    var note: Note?
+    @State var noteText: String
+    var uiImage: UIImage
+
+    init(note: Note?){
+        self.note = note
+        // _noteText will initialize noteText from the `Note` sent to us
+        _noteText = State(initialValue: self.note?.noteTitle ?? "")
+        let imageData = self.note?.imageData ?? Data()
+        
+        
+        if let image = UIImage(data: imageData) {
+              uiImage = image
+        } else {
+            uiImage = UIImage()
+        }
+    }
+
+//
     
 @State var isShowingImagePicker = false
     
     @State var imageInContainer = UIImage()
-    let imageData = UIImage().pngData()
     
     
     var body: some View {
         Section {
             
             VStack{
-//                ScrollView{
-                    TextEditor(text: self.$noteText)
+                TextEditor(text: self.$noteText)
                         .padding()
-//                }
+//
                 HStack{
-                    Image(uiImage: imageInContainer)
+                    Image(uiImage: self.uiImage)
                         .resizable()
                         .scaledToFit()
+
 
                 }
       
@@ -73,74 +82,28 @@ struct NoteView: View {
         .navigationTitle(self.noteText)
         .navigationBarItems(trailing:
                                 Button(action: {
-                                    let note = Note(context: self.managedObjectContext)
-                                    note.noteTitle = self.noteText
-                                    note.noteTimeStamp = Date()
-                                    note.image = self.imageData
+                                    note?.noteTitle = self.noteText
+                                    note?.noteText = self.noteText
+                                    note?.noteTimeStamp = Date()
+                                    note?.imageData = self.imageInContainer.jpegData(compressionQuality: 1) 
                                     
-                                    do {
-                                        try self.managedObjectContext.save()
-                                
-                                    }catch{
-                                        print(error)
-                                    }
-//                                    self.newNote = ""
-                                }) {
-                                    Image(systemName: "plus.circle.fill")
-                                        .foregroundColor(.green)
-                                }
+
+                                },    label:{
+                                    Text("Done")
+                                })
+                                .foregroundColor(.accentColor)
+
         )
     }
 
 }
 
-struct ImagePickerView: UIViewControllerRepresentable {
-    
-    @Binding var isPresented: Bool
-    @Binding var selectedImage: UIImage
-    
-    func makeUIViewController(context:
-        UIViewControllerRepresentableContext<ImagePickerView>) ->
-    UIViewController {
-        let controller = UIImagePickerController()
-       controller.delegate = context.coordinator
-        return controller
-    }
-    func makeCoordinator() -> ImagePickerView.Cooridnator {
-        return Cooridnator(parent: self)
-    }
-    
-    class Cooridnator: NSObject, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-        
-        let parent: ImagePickerView
-        init(parent: ImagePickerView){
-            self.parent = parent
-        }
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let selectedImageFromPicker = info[.originalImage] as? UIImage{
-                self.parent.selectedImage = selectedImageFromPicker
-            }
-            self.parent.isPresented = false
-        }
-    }
-    
-    func updateUIViewController(_ uiViewController:
-                                    ImagePickerView.UIViewControllerType , context:
-    UIViewControllerRepresentableContext<ImagePickerView>) {
-    }
-    
-}
 
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
 
+
+//
 struct NoteView_Previews: PreviewProvider {
     static var previews: some View {
-            NoteView()
-        
+        NoteView(note: nil)
     }
 }

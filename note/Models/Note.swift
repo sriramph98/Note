@@ -16,12 +16,11 @@ import CoreData
 //    
 //}
 public class Note:NSManagedObject, Identifiable{
-    @NSManaged public var image: Data?
+    @NSManaged public var imageData: Data?
     @NSManaged public var noteID: UUID?
     @NSManaged public var noteText: String?
     @NSManaged public var noteTimeStamp: Date?
     @NSManaged public var noteTitle: String?
-
 }
 
 extension Note {
