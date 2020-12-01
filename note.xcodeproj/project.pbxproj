@@ -31,7 +31,7 @@
 		7B440E5B25726508000C0151 /* NoteData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteData.xcdatamodel; sourceTree = "<group>"; };
 		7B862B992571DCD900216DFD /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		7B862BAA2571F5E600216DFD /* note.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = note.entitlements; sourceTree = "<group>"; };
-		7BE7FF9D2570F3BA008EE268 /* note.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = note.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7BE7FF9D2570F3BA008EE268 /* NoteIt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NoteIt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7BE7FFA02570F3BA008EE268 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7BE7FFA22570F3BA008EE268 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7BE7FFA42570F3BA008EE268 /* NoteList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteList.swift; sourceTree = "<group>"; };
@@ -88,7 +88,7 @@
 		7BE7FF9E2570F3BA008EE268 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7BE7FF9D2570F3BA008EE268 /* note.app */,
+				7BE7FF9D2570F3BA008EE268 /* NoteIt.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -139,7 +139,7 @@
 			);
 			name = note;
 			productName = note;
-			productReference = 7BE7FF9D2570F3BA008EE268 /* note.app */;
+			productReference = 7BE7FF9D2570F3BA008EE268 /* NoteIt.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -355,7 +355,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = maya.noteIt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NoteIt;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;
@@ -384,7 +384,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = maya.noteIt;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = NoteIt;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SUPPORTS_MACCATALYST = YES;

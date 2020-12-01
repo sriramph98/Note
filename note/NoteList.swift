@@ -38,6 +38,7 @@ struct NoteList: View {
                 .listStyle(InsetGroupedListStyle())
                 .navigationBarTitle(Text("Notes"))
                 .navigationBarItems(trailing:
+                                        
                                  NavigationLink(
                                     destination: NoteCompose(),
                                     label: {

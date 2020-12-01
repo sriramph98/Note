@@ -29,7 +29,7 @@ struct NoteCompose: View {
     var body: some View {
         
             
-            VStack(alignment: .trailing){
+            VStack(alignment: .leading){
          
                 ScrollView{
                     TextEditor(text: self.$noteText)
@@ -44,7 +44,10 @@ struct NoteCompose: View {
             HStack{
                 Image(uiImage: imageInContainer)
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
+                    .frame(width: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                    .cornerRadius(5)
+                    .padding()
 
             }
   

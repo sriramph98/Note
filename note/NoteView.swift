@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import UIKit
+import Combine
 
 struct NoteView: View {
 
@@ -13,11 +15,15 @@ struct NoteView: View {
     @State var noteText: String
     var uiImage: UIImage
 
+
     init(note: Note?){
         self.note = note
         // _noteText will initialize noteText from the `Note` sent to us
         _noteText = State(initialValue: self.note?.noteTitle ?? "")
         let imageData = self.note?.imageData ?? Data()
+        
+        
+        
         
         
         if let image = UIImage(data: imageData) {
@@ -31,29 +37,41 @@ struct NoteView: View {
     
 @State var isShowingImagePicker = false
     
-    @State var imageInContainer = UIImage()
+  @State var imageInContainer = UIImage()
+    
+    
     
     
     var body: some View {
+        
         Section {
             
-            VStack{
+            VStack(alignment: .leading){
                 TextEditor(text: self.$noteText)
                         .padding()
-//
-                HStack{
-                    Image(uiImage: self.uiImage)
-                        .resizable()
-                        .scaledToFit()
-
+                
+                ScrollView(.horizontal,showsIndicators:false){
+                    HStack{
+                            Image(uiImage: self.uiImage)
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: 100, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .cornerRadius(5)
+                                .padding()
+                            
+           
+                        }
+                     
+                    
+        
 
                 }
+                
       
                 HStack
                 {
                     Button(action: {
                         self.isShowingImagePicker.toggle()
-                        print("Button performed")
                     },
                     label:{
                         Label("Image", systemImage: "camera")
@@ -85,12 +103,14 @@ struct NoteView: View {
                                     note?.noteTitle = self.noteText
                                     note?.noteText = self.noteText
                                     note?.noteTimeStamp = Date()
+                               
                                     note?.imageData = self.imageInContainer.jpegData(compressionQuality: 1) 
                                     
 
                                 },    label:{
                                     Text("Done")
                                 })
+                                
                                 .foregroundColor(.accentColor)
 
         )
