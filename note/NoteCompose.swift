@@ -67,6 +67,8 @@ struct NoteCompose: View {
                                     selectedImage: self.$imageInContainer)
                     
                 })
+            
+
                             
                 Spacer()
                 Label("Delete", systemImage: "trash")
@@ -92,10 +94,11 @@ struct NoteCompose: View {
             print(error)
         }
                         self.noteText = ""
+        
     }) {
         Image(systemName: "plus.circle.fill")
-            .foregroundColor(.green)
-            .font(.system(size: 25))
+            .foregroundColor(.white)
+            .font(.system(size: 20))
 
             
     }
@@ -104,49 +107,6 @@ struct NoteCompose: View {
 
 }
 
-struct ImagePickerView: UIViewControllerRepresentable {
-    
-    @Binding var isPresented: Bool
-    @Binding var selectedImage: UIImage
-    
-    func makeUIViewController(context:
-        UIViewControllerRepresentableContext<ImagePickerView>) ->
-    UIViewController {
-        let controller = UIImagePickerController()
-       controller.delegate = context.coordinator
-        return controller
-    }
-    func makeCoordinator() -> ImagePickerView.Cooridnator {
-        return Cooridnator(parent: self)
-    }
-    
-    class Cooridnator: NSObject, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
-        
-        let parent: ImagePickerView
-        init(parent: ImagePickerView){
-            self.parent = parent
-        }
-        
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            if let selectedImageFromPicker = info[.originalImage] as? UIImage{
-                self.parent.selectedImage = selectedImageFromPicker
-            }
-            self.parent.isPresented = false
-        }
-    }
-    
-    func updateUIViewController(_ uiViewController:
-                                    ImagePickerView.UIViewControllerType , context:
-    UIViewControllerRepresentableContext<ImagePickerView>) {
-    }
-    
-}
-
-extension View {
-    func hideKeyboard() {
-        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
-    }
-}
 
 struct NoteCompose_Previews: PreviewProvider {
     static var previews: some View {

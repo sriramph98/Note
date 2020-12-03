@@ -25,12 +25,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             let window = UIWindow(windowScene: windowScene)
  
             let managedObjectContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-            
             let launchView = NoteList().environment(\.managedObjectContext, managedObjectContext)
-
+                        
+            
             
                 
-            window.rootViewController = UIHostingController(rootView: launchView)
+            window.rootViewController = UIHostingController(rootView: launchView.environmentObject(SessionStore()))
             self.window = window
             window.makeKeyAndVisible()
         }

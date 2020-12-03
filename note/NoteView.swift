@@ -11,6 +11,9 @@ import Combine
 
 struct NoteView: View {
 
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @FetchRequest(fetchRequest: Note.getAllNotes()) var notes: FetchedResults<Note>
+    
     var note: Note?
     @State var noteText: String
     var uiImage: UIImage
@@ -37,33 +40,41 @@ struct NoteView: View {
     
 @State var isShowingImagePicker = false
     
-  @State var imageInContainer = UIImage()
+    @State var imageInContainer = UIImage()
+    
+    
     
     
     
     
     var body: some View {
         
-        Section {
-            
+        VStack {
+          
             VStack(alignment: .leading){
-                TextEditor(text: self.$noteText)
-                        .padding()
-                
+                    TextEditor(text: self.$noteText)
+                            .padding()
+                    
+               
                 ScrollView(.horizontal,showsIndicators:false){
+                    
                     HStack{
                             Image(uiImage: self.uiImage)
                                 .resizable()
                                 .scaledToFill()
-                                .frame(width: 100, height: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                                .frame(width: 80, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
                                 .cornerRadius(5)
                                 .padding()
+                        
+                        Image(uiImage: self.imageInContainer)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(width: 80, height: 80, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+                            .cornerRadius(5)
+                            .padding()
                             
            
-                        }
-                     
-                    
-        
+                    }
 
                 }
                 
@@ -83,10 +94,33 @@ struct NoteView: View {
                                         selectedImage: self.$imageInContainer)
                         
                     })
-                                
+                    
                     Spacer()
-                    Label("Delete", systemImage: "trash")
+                    Label("Format", systemImage: "bold.italic.underline")
+                    Spacer()
+                    Label("Format", systemImage: "paintbrush")
+
+                    Spacer()
+                    Button(action: {
+                        self.managedObjectContext.delete(self.note!)
+                        
+                                do{
+                                    try self.managedObjectContext.save()
+                                    
+                                }catch{
+                                    print(error)
+                                }
+                    }
+                    ,
+                    label:{
+                        Label("Delete", systemImage: "trash")
+                            .foregroundColor(.red)
+                            
+                        
+                    })
+
                 }
+
                 .foregroundColor(.accentColor)
                 .font(.system(size: 20))
                 .labelStyle(IconOnlyLabelStyle())
@@ -100,25 +134,72 @@ struct NoteView: View {
         .navigationTitle(self.noteText)
         .navigationBarItems(trailing:
                                 Button(action: {
+                                    
                                     note?.noteTitle = self.noteText
                                     note?.noteText = self.noteText
                                     note?.noteTimeStamp = Date()
-                               
-                                    note?.imageData = self.imageInContainer.jpegData(compressionQuality: 1) 
+                                    note?.imageData = self.imageInContainer.jpegData(compressionQuality: 1)
                                     
-
+                              
+                                    if self.noteText == ""
+                                    {
+                                        self.noteText = "Write Something"
+                                    }
                                 },    label:{
-                                    Text("Done")
+                                    Text("Save")
                                 })
-                                
+                               
                                 .foregroundColor(.accentColor)
 
         )
     }
-
+    
 }
 
 
+struct ImagePickerView: UIViewControllerRepresentable {
+    
+    @Binding var isPresented: Bool
+    @Binding var selectedImage: UIImage
+    
+    func makeUIViewController(context:
+        UIViewControllerRepresentableContext<ImagePickerView>) ->
+    UIViewController {
+        let controller = UIImagePickerController()
+       controller.delegate = context.coordinator
+        return controller
+    }
+    func makeCoordinator() -> ImagePickerView.Cooridnator {
+        return Cooridnator(parent: self)
+    }
+    
+    class Cooridnator: NSObject, UIImagePickerControllerDelegate,UINavigationControllerDelegate{
+        
+        let parent: ImagePickerView
+        init(parent: ImagePickerView){
+            self.parent = parent
+        }
+        
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let selectedImageFromPicker = info[.originalImage] as? UIImage{
+                self.parent.selectedImage = selectedImageFromPicker
+            }
+            self.parent.isPresented = false
+        }
+    }
+    
+    func updateUIViewController(_ uiViewController:
+                                    ImagePickerView.UIViewControllerType , context:
+    UIViewControllerRepresentableContext<ImagePickerView>) {
+    }
+    
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
 
 
 //
