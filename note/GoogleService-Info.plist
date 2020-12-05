@@ -13,21 +13,21 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.maya.NoteIt</string>
+	<string>maya.NoteIt</string>
 	<key>PROJECT_ID</key>
 	<string>noteitfirebase</string>
 	<key>STORAGE_BUCKET</key>
 	<string>noteitfirebase.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:508404251811:ios:44a4a6f2c5b0f8b3a71316</string>
 </dict>

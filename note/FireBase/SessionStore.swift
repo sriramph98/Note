@@ -9,6 +9,8 @@ import SwiftUI
 import Firebase
 import Combine
 
+
+
 class SessionStore: ObservableObject{
     var didChange = PassthroughSubject<SessionStore,Never>()
     @Published var session: User? {didSet {self.didChange.send(self) }}
@@ -27,7 +29,10 @@ class SessionStore: ObservableObject{
 }
     
     func signUp(email: String, password: String, handler: @escaping AuthDataResultCallback){
+        
         Auth.auth().createUser(withEmail: email, password: password, completion: handler)
+//        Auth.auth().currentUser?.sendEmailVerification(with: ActionCodeSettings, completion: <#T##((Error?) -> Void)?##((Error?) -> Void)?##(Error?) -> Void#>)
+        
     }
     
     func signIn(email: String, password: String, handler: @escaping AuthDataResultCallback){

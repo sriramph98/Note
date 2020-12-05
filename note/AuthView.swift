@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAuth
 
 struct SignInView: View {
     
@@ -31,7 +32,8 @@ struct SignInView: View {
             VStack{
                 Text("Sign In")
                     .padding()
-
+                    .font(.system(size: 40, weight: .bold, design: .default))
+                
                 TextField("Email", text:$email)
                     .padding()
 
@@ -70,6 +72,8 @@ struct SignUpView: View{
     @State var password: String = ""
     @State var error: String = ""
     @EnvironmentObject var session: SessionStore
+    
+    
 
     func signUp(){
         session.signUp(email: email, password: password) { (result, error) in
@@ -80,24 +84,32 @@ struct SignUpView: View{
                 self.password = ""
             }
         }
+        
+
+
     }
     
     var body: some View{
         VStack{
             Text("Sign Up")
+                .font(.system(size: 40, weight: .bold, design: .default))
             Text("Create new account")
+                .font(.caption)
             
         }
         
         VStack{
             TextField("Email", text:$email)
+                .padding()
             SecureField("Password", text:$password)
+                .padding()
             
             Button(action:signUp){
                 Text("Create Account")
+                    .padding()
             }
      
-        }
+        }.padding()
         
         if (error != ""){
             Text(error)
@@ -111,7 +123,7 @@ struct AuthView: View {
     var body: some View {
         NavigationView{
             SignInView()
-        }
+        }.navigationViewStyle(StackNavigationViewStyle())
     }
 }
 
