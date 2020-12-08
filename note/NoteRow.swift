@@ -11,16 +11,27 @@ struct NoteRow: View {
     
     var noteTitle: String = ""
     var noteTimeStamp: String = ""
+//    var ImageData: Data?
     
     var body: some View {
-        
-        VStack(alignment: .leading){
-            Text(noteTitle)
-                .font(.headline)
-            Text(noteTimeStamp)
-                .font(.caption)
-                .foregroundColor(.gray)
+        HStack{
+            VStack(alignment: .leading){
+                Text(noteTitle)
+                    .font(.headline)
+                Text(noteTimeStamp)
+                    .font(.caption)
+                    .foregroundColor(.gray)
+                
+            }.padding()
+            
+//            Spacer()
+//            Image(systemName: "photo.fill")
+//                .frame(width: 20, height: 20, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
+//                .padding()
+            
+            
         }
+
         
     }
 }

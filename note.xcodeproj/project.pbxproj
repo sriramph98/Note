@@ -7,12 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		29C4721548D295D7DDA7C710 /* Pods_note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E14E13192BDF0712B977DA04 /* Pods_note.framework */; };
-		7B0EC41D25710D5700D23779 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0EC41C25710D5700D23779 /* Data.swift */; };
 		7B0EC42225710D6D00D23779 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B0EC42125710D6D00D23779 /* Note.swift */; };
-		7B0EC43425710EAA00D23779 /* NoteData.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B0EC43325710EAA00D23779 /* NoteData.json */; };
 		7B1755022573430E00FEFCA6 /* NoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B1755012573430E00FEFCA6 /* NoteView.swift */; };
 		7B440E5C25726508000C0151 /* NoteData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7B440E5A25726508000C0151 /* NoteData.xcdatamodeld */; };
+		7B837463257F855900C82076 /* Pods_note.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B837462257F855900C82076 /* Pods_note.framework */; };
+		7B837464257F855900C82076 /* Pods_note.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7B837462257F855900C82076 /* Pods_note.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		7B862B9A2571DCD900216DFD /* NoteRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B862B992571DCD900216DFD /* NoteRow.swift */; };
 		7B9BEDDD2579002E00B4A0D0 /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B9BEDDC2579002E00B4A0D0 /* AuthView.swift */; };
 		7B9BEDF725791C4200B4A0D0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7B9BEDF625791C4100B4A0D0 /* GoogleService-Info.plist */; };
@@ -25,12 +24,25 @@
 		7BFCDC492578F4C200BD0C01 /* SessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCDC482578F4C200BD0C01 /* SessionStore.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		7B837465257F855900C82076 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				7B837464257F855900C82076 /* Pods_note.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		7B0EC41C25710D5700D23779 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
 		7B0EC42125710D6D00D23779 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
-		7B0EC43325710EAA00D23779 /* NoteData.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = NoteData.json; sourceTree = "<group>"; };
 		7B1755012573430E00FEFCA6 /* NoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteView.swift; sourceTree = "<group>"; };
 		7B440E5B25726508000C0151 /* NoteData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NoteData.xcdatamodel; sourceTree = "<group>"; };
+		7B837462257F855900C82076 /* Pods_note.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_note.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B862B992571DCD900216DFD /* NoteRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteRow.swift; sourceTree = "<group>"; };
 		7B862BAA2571F5E600216DFD /* note.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = note.entitlements; sourceTree = "<group>"; };
 		7B9BEDDC2579002E00B4A0D0 /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
@@ -54,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				29C4721548D295D7DDA7C710 /* Pods_note.framework in Frameworks */,
+				7B837463257F855900C82076 /* Pods_note.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -64,6 +76,7 @@
 		4298BE9A1BBFB26D8A543F6E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B837462257F855900C82076 /* Pods_note.framework */,
 				E14E13192BDF0712B977DA04 /* Pods_note.framework */,
 			);
 			name = Frameworks;
@@ -92,15 +105,6 @@
 				7B440E5A25726508000C0151 /* NoteData.xcdatamodeld */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		7B4FC0FA257273340086AC16 /* delete */ = {
-			isa = PBXGroup;
-			children = (
-				7B0EC41C25710D5700D23779 /* Data.swift */,
-				7B0EC43325710EAA00D23779 /* NoteData.json */,
-			);
-			path = delete;
 			sourceTree = "<group>";
 		};
 		7BE7FF942570F3BA008EE268 = {
@@ -135,7 +139,6 @@
 				7B1755012573430E00FEFCA6 /* NoteView.swift */,
 				7B9BEDF625791C4100B4A0D0 /* GoogleService-Info.plist */,
 				7B0EC43225710E8900D23779 /* Resources */,
-				7B4FC0FA257273340086AC16 /* delete */,
 				7BE7FFA62570F3BE008EE268 /* Assets.xcassets */,
 				7BE7FFAB2570F3BE008EE268 /* LaunchScreen.storyboard */,
 				7BE7FFAE2570F3BE008EE268 /* Info.plist */,
@@ -172,6 +175,7 @@
 				7BE7FF9A2570F3BA008EE268 /* Frameworks */,
 				7BE7FF9B2570F3BA008EE268 /* Resources */,
 				8149E17108D4BB5392D7DCB1 /* [CP] Embed Pods Frameworks */,
+				7B837465257F855900C82076 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -220,7 +224,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7BE7FFAD2570F3BE008EE268 /* LaunchScreen.storyboard in Resources */,
-				7B0EC43425710EAA00D23779 /* NoteData.json in Resources */,
 				7BE7FFAA2570F3BE008EE268 /* Preview Assets.xcassets in Resources */,
 				7BE7FFA72570F3BE008EE268 /* Assets.xcassets in Resources */,
 				7B9BEDF725791C4200B4A0D0 /* GoogleService-Info.plist in Resources */,
@@ -277,7 +280,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B862B9A2571DCD900216DFD /* NoteRow.swift in Sources */,
-				7B0EC41D25710D5700D23779 /* Data.swift in Sources */,
 				7BE7FFA12570F3BA008EE268 /* AppDelegate.swift in Sources */,
 				7BE7FFA32570F3BA008EE268 /* SceneDelegate.swift in Sources */,
 				7B440E5C25726508000C0151 /* NoteData.xcdatamodeld in Sources */,

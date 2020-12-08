@@ -7,9 +7,12 @@
 
 import SwiftUI
 import Firebase
+import UIKit
 
 
 struct NoteList: View {
+
+
     
 //    @State private var selectedView: Int? = 0
     
@@ -25,15 +28,33 @@ struct NoteList: View {
 
     var body: some View {
         
-        VStack{
             
             VStack{
-                    NavigationView {
+                NavigationView{
                         List{
                             ForEach(self.notes){ note in
                                 NavigationLink(destination: NoteView(note: note)){
-                                    NoteRow(noteTitle: note.noteTitle! , noteTimeStamp: "\(note.noteTimeStamp!)")
-                                }}.onDelete(perform: { indexSet in
+                                    NoteRow(noteTitle: note.noteTitle! , noteTimeStamp: "\(note.noteTimeStamp!)").lineLimit(1)
+                                        
+                                }
+                                .contextMenu(ContextMenu(){
+                                    
+                                    Button(action: {
+                                        self.managedObjectContext.delete(note)
+                                    }) {
+                                        HStack{
+                                            Text("Delete")
+                                            Image(systemName: "trash")
+                                                .foregroundColor(.red)
+                                        }
+                                    }
+                                }
+                                
+                                )
+                            }
+                            
+                                
+                                .onDelete(perform: { indexSet in
                                     let deleteItem = self.notes[indexSet.first!]
                                     self.managedObjectContext.delete(deleteItem)
                                     do{
@@ -46,10 +67,11 @@ struct NoteList: View {
                             
                             
                         }
+            
                         
+                   
                         .listStyle(InsetGroupedListStyle())
                         .navigationBarTitle(Text("Notes"))
-                        
                         .navigationBarItems(
                             
 //                            leading:     Button(action: session.signOut){
@@ -57,18 +79,22 @@ struct NoteList: View {
 //                                .font(.system(size: 20))
 //
 //                        },
+                
                             trailing:
                             
                             NavigationLink(
-//                                destination: NoteCompose(),
                                 destination: NoteView(note:nil),
 
                                 label: {
                                     Image(systemName:"square.and.pencil")
-                                        .font(.system(size: 20)   )
+                                        .font(.system(size: 20))
+
                                     
                                 })  )
+                    
+                        
                     }
+                    
                     //                        .onAppear{
                     //                            let device = UIDevice.current
                     //                            if device.model == "iPad" && device.orientation.isLandscape{
@@ -87,11 +113,13 @@ struct NoteList: View {
             }
 //            .onAppear(perform: getUser)
             
-        }
+        
         
     }
     
 }
+
+
 
 struct NoteList_Previews: PreviewProvider {
     static var previews: some View {

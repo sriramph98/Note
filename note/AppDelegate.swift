@@ -4,10 +4,11 @@
 //
 //  Created by Sriram P H on 27/11/20.
 //
-import FirebaseAnalytics
 import UIKit
 import CoreData
 import Firebase
+import FirebaseAnalytics
+
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
